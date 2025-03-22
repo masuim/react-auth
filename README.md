@@ -1,54 +1,114 @@
-# React + TypeScript + Vite
+# React TypeScript Authentication Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+このプロジェクトは、React と TypeScript を使用した認証機能を持つ Web アプリケーションのテンプレートです。
 
-Currently, two official plugins are available:
+## 技術スタック
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### フロントエンド
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Tailwind CSS v4.0
+- React Router DOM (ルーティング)
+- Zod (バリデーション)
+- Universal Cookie (Cookie 管理)
+- Lucide React (アイコン)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### アーキテクチャ
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Atomic Design
+  - atoms: 最小単位のコンポーネント（Button, Input, Label など）
+  - molecules: 複数の atoms で構成（AuthInput, SubmitButton など）
+  - organisms: 複数の molecules で構成（AuthForm など）
+  - templates: ページレイアウトのテンプレート
+  - pages: ページコンポーネント
+- ディレクトリベースのコンポーネント設計
+- コールバックベースの非同期処理
+
+## プロジェクト構成
+
+```
+src/
+├── components/         # Atomic Designベースのコンポーネント
+│   ├── atoms/         # 最小単位のコンポーネント
+│   ├── molecules/     # 複数のatomsで構成されるコンポーネント
+│   ├── organisms/     # 複数のmoleculesで構成されるコンポーネント
+│   ├── templates/     # ページレイアウトのテンプレート
+│   └── pages/         # ページコンポーネント
+├── features/          # 機能ごとのロジック
+│   ├── auth/          # 認証関連
+│   └── user/          # ユーザー関連
+├── hooks/             # カスタムフック
+├── lib/               # ユーティリティ関数やヘルパー
+├── types/             # 型定義
+├── styles/            # グローバルスタイル
+└── mocks/             # モックデータ
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## セットアップ手順
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. 依存パッケージのインストール
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+2. Tailwind CSS のインストールと設定
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+3. その他の必要なパッケージのインストール
+
+```bash
+npm install @hookform/resolvers universal-cookie zod react-router-dom lucide-react
+```
+
+4. 開発サーバーの起動
+
+```bash
+npm run dev
+```
+
+## 機能概要
+
+### 認証機能
+
+- ログインページ
+  - Zod によるフォームバリデーション
+  - エラーハンドリング
+  - トークンベースの認証
+  - パスワード表示/非表示切り替え
+
+### トップページ
+
+- ログイン状態の維持
+- ユーザー情報の表示
+- ログアウト機能
+
+## 開発ガイドライン
+
+### コンポーネント設計
+
+- Atomic Design の原則に従う
+- 再利用可能なコンポーネントの作成
+- Props 型の明示的な定義
+- React 19 の新機能を活用した実装
+
+### スタイリング
+
+- Tailwind CSS のユーティリティクラスを使用
+- アクセシビリティに配慮した UI 実装
+
+### 状態管理
+
+- ローカルステート: React useState
+- コンテキスト: React Context API
+- フォーム状態: useFormState と useFormStatus
+- トランジション: useTransition（UI 更新の優先順位付け）
+- 非同期処理: async/await with Server Components
+
+## ライセンス
+
+MIT
