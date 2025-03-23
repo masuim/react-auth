@@ -31,10 +31,10 @@
 src/
 ├── components/         # Atomic Designベースのコンポーネント
 │   ├── atoms/         # 最小単位のコンポーネント
-│   ├── molecules/     # 複数のatomsで構成されるコンポーネント
+│   ├── molecules/     # 複数の要素で構成されるコンポーネント
 │   ├── organisms/     # 複数のmoleculesで構成されるコンポーネント
-│   ├── templates/     # ページレイアウトのテンプレート
-│   └── pages/         # ページコンポーネント
+│   └── templates/     # ページレイアウトのテンプレート
+├── pages/             # ページコンポーネント
 ├── features/          # 機能ごとのロジック
 │   ├── auth/          # 認証関連
 │   └── user/          # ユーザー関連
